@@ -11,9 +11,13 @@ console.log("EXECUTED!");
 
 import dotenv from "dotenv"; 
 dotenv.config(); 
-import app from "./app";
 
+import app from "./app";
 import mongoose from "mongoose";
+
+mongoose.set("strictQuery", false);
+
+
 mongoose
   .connect(process.env.MONGO_URL as string, {})
   .then((data) => {
