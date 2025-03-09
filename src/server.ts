@@ -15,7 +15,7 @@ dotenv.config();
 import app from "./app";
 import mongoose from "mongoose";
 
-mongoose.set("strictQuery", false);
+// mongoose.set("strictQuery", false);
 
 
 mongoose
