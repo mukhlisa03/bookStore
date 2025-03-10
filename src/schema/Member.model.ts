@@ -13,50 +13,50 @@ enum => belgn qiymatlar ketma-ketligi (spesific case) ishl,di
 // _id  => bn 9ta data kirtldi
 const memberSchema = new Schema({    
     memberType: {
-        type: String,
+        type: "string",
         enum: MemberType,
         default: MemberType.USER  // kirtlmagan default USER ni oladi
     },
 
     memberStatus: {
-        type: String,
+        type: "string",
         enum: MemberStatus,
         default: MemberStatus.ACTIVE, 
     },
 
 
     memberNick: {
-        type: String,
+        type: "string",
         index: {unique: true, sparse: true},    
         required: true,
     }, 
 
 
     memberPhone: {
-        type: String,
+        type: "string",
         index: {unique: true, sparse: true},
         required: true,  // tel raqam kirtlshi shart buyrugi berlyapti
     },
 
 
     memberPassword: {
-        type: String,
+        type: "string",
         select: false,  // database by default olb bermasn sababi u sirli malumot
         required: true,   // passwrod albatta bolishi kk bolgan dataset
     },
 
     memberAddress: {
-        type: String,
+        type: "string",
     },
 
 
     memberDesc: {
-        type: String,
+        type: "string",
     },
 
 
     memberImage: {
-        type: String,
+        type: "string",
     },
 },
 {timestamps: true}    // createdAt va UpdatedAt ni avtomatik qoyb beradi

@@ -3,8 +3,8 @@ import { MemberStatus, MemberType } from "../enums/member.enum";
 
 export interface Member {
     _id: ObjectId;
-    memberType: MemberType;
-    memberStatus: MemberStatus;
+    memberType?: MemberType;
+    memberStatus?: MemberStatus;
     memberNick: string;
     memberPhone: string;
     memberPassword?: string;
@@ -26,4 +26,9 @@ export interface MemberInput {
     memberAddress?: string;
     memberDesc?: string;
     memberImage?: string;
+}
+
+export interface LoginInput {
+    memberNick: string;
+    memberPassword: string;
 }
