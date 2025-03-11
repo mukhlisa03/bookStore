@@ -21,7 +21,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 /** 4-ROUTERS **/
-app.use("/admin", routerAdmin); // BSSR => Adminka loyihasi uchun => backendda frontendni qurb olsh
+app.use("/admin", routerAdmin); // SSR => Adminka loyihasi uchun => backendda frontendni qurb olsh
 app.use("/", router);  // SPA: REACT
 
 export default app;

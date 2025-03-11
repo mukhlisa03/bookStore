@@ -4,6 +4,8 @@ import MemberService from "../models/Member.service";
 import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
+const memberService = new MemberService();
+
 const libraryController: T = {};
 libraryController.goHome = (req: Request, res: Response) => {
   try {
@@ -11,15 +13,6 @@ libraryController.goHome = (req: Request, res: Response) => {
     res.send("Home Page!");
   } catch (err) {
     console.log("Error, goHome", err);
-  }
-};
-
-libraryController.getLogin = (req: Request, res: Response) => {
-  try {
-    console.log("getLogin");
-    res.send("Login Page!");
-  } catch (err) {
-    console.log("Error, getLogin", err);
   }
 };
 
@@ -32,14 +25,39 @@ libraryController.getSignup = (req: Request, res: Response) => {
   }
 };
 
+libraryController.getLogin = (req: Request, res: Response) => {
+  try {
+    console.log("getLogin");
+    res.send("Login Page!");
+  } catch (err) {
+    console.log("Error, getLogin", err);
+  }
+};
+
+
+libraryController.processSignup = async (req: Request, res: Response) => {
+  try {
+    console.log("processSignup");
+
+    const newMember: MemberInput = req.body;
+    newMember.memberType = MemberType.LIBRARY;
+    const result = await memberService.processSignup(newMember);
+    // TODO: SESSIONS Authentication
+
+    res.send(result);
+  } catch (err) {
+    console.log("Error, processSignup", err);
+    res.send(err);
+  }
+};
+
 libraryController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    console.log("body", req.body);
-    const input: LoginInput = req.body;
 
-    const memberService = new MemberService();
+    const input: LoginInput = req.body;
     const result = await memberService.processLogin(input);
+    // TODO: SESSIONS Authentication
 
     res.send(result);
   } catch (err) {
@@ -48,21 +66,6 @@ libraryController.processLogin = async (req: Request, res: Response) => {
   }
 };
 
-libraryController.processSignup = async (req: Request, res: Response) => {
-  try {
-    console.log("processSignup");
-    console.log("body", req.body);
 
-    const newMember: MemberInput = req.body;
-    newMember.memberType = MemberType.LIBRARY;
-
-    const memberService = new MemberService();
-    const result = await memberService.processSignup(newMember);
-    res.send(result);
-  } catch (err) {
-    console.log("Error, processSignup", err);
-    res.send(err);
-  }
-};
 
 export default libraryController;
