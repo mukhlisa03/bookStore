@@ -32,7 +32,7 @@ app.use(
       // maxAge: 1000 * 3600 * 3, // 3h amal qlshi
       maxAge: 1000 * 3600 * 24,
     },
-    store: store, // yuqorida hosl qlngan store qiymati(session -> mongodb ni session qsmida hosl bolishi takdlanyapti)
+    store: store, // yuqorida hosl qlngan store qiymati(session -> mongodb ni session qsmida)
     resave: true, // amal qlsh muddati 
     saveUninitialized: true,
   })
