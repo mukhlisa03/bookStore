@@ -12,6 +12,8 @@ routerAdmin
     .get("/signup", libraryController.getSignup) 
     .post("/signup", libraryController.processSignup);
 
+routerAdmin.get("/check-me", libraryController.checkAuthSession);
+
 /** BOOK **/
 /** USER **/    
 
