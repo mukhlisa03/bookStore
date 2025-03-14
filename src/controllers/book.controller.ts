@@ -24,6 +24,7 @@ bookController.getAllBooks = async (req: Request, res: Response) => {
 bookController.createNewBook = async (req: Request, res: Response) => {
   try {
     console.log("createNewBook");
+    res.send("DONE!");
     
   } catch (err) {
     console.log("Error, createNewBook", err);

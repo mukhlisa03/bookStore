@@ -2,6 +2,7 @@ import express from "express";
 const routerAdmin = express.Router();
 import libraryController from "./controllers/library.controller";
 import bookController from "./controllers/book.controller";
+import makeUploader  from "./libs/utils/uploader";
 
 /** LIBRARY **/
 routerAdmin.get("/", libraryController.goHome);
@@ -10,11 +11,15 @@ routerAdmin
   .post("/login", libraryController.processLogin);
 routerAdmin
   .get("/signup", libraryController.getSignup)
-  .post("/signup", libraryController.processSignup);
+  .post(
+    "/signup",
+    makeUploader("members").single("memberImage"),
+    libraryController.processSignup
+  );
 routerAdmin.get("/logout", libraryController.logout);
 routerAdmin.get("/check-me", libraryController.checkAuthSession);
 
-/** BOOK **/
+/** BOOK **/ 
 routerAdmin.get(
   "/book/all",
   libraryController.verifyLibrary,
@@ -23,6 +28,7 @@ routerAdmin.get(
 routerAdmin.post(
   "/book/create",
   libraryController.verifyLibrary,
+  makeUploader("books").array("bookImages", 5),
   bookController.createNewBook
 );
 routerAdmin.post(
