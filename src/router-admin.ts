@@ -1,6 +1,7 @@
 import express from 'express';
 const routerAdmin = express.Router();
 import libraryController from './controllers/library.controller';
+import bookController from './controllers/book.controller';
 
 
 /** LIBRARY **/
@@ -14,7 +15,15 @@ routerAdmin
 routerAdmin.get("/logout", libraryController.logout);
 routerAdmin.get("/check-me", libraryController.checkAuthSession);
 
+
+
 /** BOOK **/
+routerAdmin.get("/book/all", bookController.getAllBooks);
+routerAdmin.post("/book/create", bookController.createNewBook);
+routerAdmin.post("/book/:id", bookController.updateChosenBook);
+
+
+
 /** USER **/    
 
 export default routerAdmin;
