@@ -25,3 +25,16 @@ export interface BookInput {
   bookDesc: string;
   bookViews?: number;
 }
+
+export interface BookUpdateInput {
+  _id: ObjectId;
+  bookStatus?: BookStatus;
+  bookName?: string;
+  bookPrice?: number;
+  bookType?: string;
+  bookImages?: string[];
+  bookAuthor?: string;
+  bookLanguage?: string;
+  bookDesc?: string;
+  bookViews?: number;
+}

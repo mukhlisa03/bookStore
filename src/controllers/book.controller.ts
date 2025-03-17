@@ -54,6 +54,12 @@ bookController.createNewBook = async (req: AdminRequest, res: Response) => {
 bookController.updateChosenBook = async (req: Request, res: Response) => {
   try {
     console.log("updateChosenBook");
+    const id = req.params.id;
+    // console.log("id:", id);
+
+    const result = await bookService.updateChosenBook(id, req.body);
+
+    res.status(HttpCode.OK).json({data: result});
   } catch (err) {
     console.log("Error, updateChosenBook", err);
     if (err instanceof Errors) res.status(err.code).json(err);
