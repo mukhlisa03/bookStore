@@ -4,6 +4,10 @@
   <div>
     <div>BOOKS PAGE</div>
     <div><%=member.memberNick%></div>
+
+    <% books.map((value, key) => { %>
+      <p><%= value.bookName %> - <%= value.bookDesc %></p>
+    <% })%>
   </div>
 </body>
 

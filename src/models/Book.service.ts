@@ -14,6 +14,17 @@ class BookService {
 
   /** SSR **/
 
+  public async getAllBooks(): Promise<Book[]> {
+    const result = await this.bookModel.find().exec();
+    if (result.length === 0)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result.map((book) => ({
+      ...book.toObject(),
+      _id: book._id.toString(),
+    }));
+  }
+
   public async createNewBook(input: BookInput): Promise<Book> {
     try {
       const book = await this.bookModel.create(input);
@@ -33,9 +44,9 @@ class BookService {
     const result = await this.bookModel
       .findOneAndUpdate({ _id: id }, input, { new: true })
       .exec();
-      if(!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
 
-      return result.toObject();
+    return result.toObject();
   }
 }
 

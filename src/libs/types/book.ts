@@ -2,7 +2,7 @@ import { ObjectId } from "mongoose";
 import { BookStatus } from "../enums/book.enum";
 
 export interface Book {
-  _id: ObjectId;
+  _id:  string | ObjectId; 
   bookStatus: BookStatus;
   bookName: string;
   bookPrice: number;
