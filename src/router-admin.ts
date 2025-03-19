@@ -44,4 +44,11 @@ routerAdmin.get(
   libraryController.getUsers
 );
 
+routerAdmin.post(
+  "/user/edit",
+  libraryController.verifyLibrary,
+  libraryController.updateChosenUser
+);
+
+
 export default routerAdmin;
