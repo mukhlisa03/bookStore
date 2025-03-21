@@ -1,1 +1,1 @@
-console.log("Products frontend javascript file");
+console.log("Books frontend javascript file");

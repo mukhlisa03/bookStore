@@ -27,9 +27,9 @@
 
     <div class="library-menu-frame">
       <div class="board">
-        <div class="dishes-table">
-          <span class="new-dish-txt" style="margin-bottom: 30px">
-            RESTAURANT MENU
+        <div class="books-table">
+          <span class="new-book-txt" style="margin-bottom: 30px" >
+            LIBRARY MENU
           </span>
           <table class="table table-bordered table-hover">
             <thead class="thead-light">
@@ -37,9 +37,9 @@
                 <th scope="col">T/r</th>
                 <th scope="col">Book Name</th>
                 <th scope="col">Book Type</th>
+                <th scope="col">Book Language</th>
                 <th scope="col">Book Author</th>
                 <th scope="col">Book Price</th>
-                <th scope="col">Book Language</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -67,11 +67,11 @@
         <form
           action="/admin/book/create"
           method="POST"
-          class="dish-container"
+          class="book-container"
           enctype="multipart/form-data"
         >
           <div class="long-input" style="display: flex; align-items: center">
-            <span class="new-dish-txt">NEW BOOK DETAIL</span>
+            <span class="new-book-txt">NEW BOOK DETAIL</span>
           </div>
           <div class="login-input-frame">
             <div class="long-input">
@@ -160,7 +160,7 @@
                   class="image-five"
                 />
               </div>
-              <input name="restaurantIid" class="restaurant-id" hidden />
+              <input name="libraryid" class="library-id" hidden />
             </div>
           </div>
 

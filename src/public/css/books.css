@@ -31,7 +31,7 @@
   font-family: monospace;
 }
 
-.books-container .restaurant-menu-frame {
+.books-container .library-menu-frame {
   position: relative;
   padding-bottom: 80px;
   width: 100%;
@@ -42,7 +42,7 @@
   align-items: center;
 }
 
-.books-container .restaurant-menu-frame .board {
+.books-container .library-menu-frame .board {
   position: relative;
   margin-top: 100px;
   width: 1320px;
@@ -52,7 +52,7 @@
   align-items: center;
 }
 
-.books-container .board .dishes-table {
+.books-container .board .books-table {
   position: relative;
   width: 100%;
   height: auto;
@@ -62,7 +62,7 @@
   align-items: center;
 }
 
-.books-container .board .dish-container {
+.books-container .board .book-container {
   position: relative;
   margin-top: 20px;
   width: 100%;
@@ -74,7 +74,7 @@
   align-items: center;
 }
 
-.books-container .new-dish-txt {
+.books-container .new-book-txt {
   font-family: "Source Serif Pro";
   font-style: normal;
   font-weight: 400;
@@ -180,7 +180,7 @@
   color: #4f547b;
 }
 
-.books-container .dish-container .half-input-frame {
+.books-container .book-container .half-input-frame {
   position: relative;
   margin-top: 25px;
   width: 100%;
