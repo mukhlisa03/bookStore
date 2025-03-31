@@ -1,16 +1,16 @@
 console.log("Books frontend javascript file");
 
-// $(function () {
-//   $(".product-collection").on("change", () => {
-//     const selectedValue = $(".product-collection").val();
-//     if (selectedValue === "DRINK") {
-//       $("#product-collection").hide();
-//       $("#product-volume").show();
-//     } else {
-//       $("#product-volume").hide();
-//       $("#product-collection").show();
-//     }
-//   });
+$(function () {
+  $(".product-collection").on("change", () => {
+    const selectedValue = $(".product-collection").val();
+    if (selectedValue === "DRINK") {
+      $("#product-collection").hide();
+      $("#product-volume").show();
+    } else {
+      $("#product-volume").hide();
+      $("#product-collection").show();
+    }
+  });
 
   $("#process-btn").on("click", () => {
     $(".book-container").slideToggle(500);
@@ -41,7 +41,7 @@ console.log("Books frontend javascript file");
       alert("Book update failed!");
     }
   });
-// });
+});
 
 function validateForm() {
   // hamma malumotlar togri krtlganni anqlab beradi
@@ -90,6 +90,7 @@ function previewFileHandler(input, order) {
     }
   }
 }
+
 
 //PAUSE => restaran to uni tayyorbolganligiga ishonch hosl qgncha
 // shu holatda turadi, bomsa u user page ga chqb ketadi, shuni oldini olsh un ishldi
