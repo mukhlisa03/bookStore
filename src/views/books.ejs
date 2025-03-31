@@ -28,7 +28,7 @@
     <div class="library-menu-frame">
       <div class="board">
         <div class="books-table">
-          <span class="new-dish-txt" style="margin-bottom: 30px">
+          <span class="new-book-txt" style="margin-bottom: 30px">
             LIBRARY MENU
           </span>
           <table class="table table-bordered table-hover">
@@ -43,7 +43,7 @@
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <!--  LOOP PRODUCTS: START  -->
+            <!--  LOOP BOOKS: START  -->
             <% books.map(function(value, key) { %>
               <tbody style="background: white">
                 <td><%= key + 1 %></td>
@@ -63,7 +63,7 @@
                 </td>
               </tbody>
             <% })  %>
-            <!--  LOOP PRODUCTS: END  -->
+            <!--  LOOP BOOKS: END  -->
           </table>
           <div
             class="long-input"
@@ -132,7 +132,7 @@
               />
             </div>
 
-            <div class="half-input" id="product-collection">
+            <div class="half-input" id="book-collection">
               <label>Book Price</label>
               <input
                 type="number"

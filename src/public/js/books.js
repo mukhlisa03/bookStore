@@ -1,15 +1,15 @@
 console.log("Books frontend javascript file");
 
 $(function () {
-  $(".product-collection").on("change", () => {
-    const selectedValue = $(".product-collection").val();
-    if (selectedValue === "DRINK") {
-      $("#product-collection").hide();
-      $("#product-volume").show();
-    } else {
-      $("#product-volume").hide();
-      $("#product-collection").show();
-    }
+  $(".book-collection").on("change", () => {
+    const selectedValue = $(".book-collection").val();
+    // if (selectedValue === "DRINK") {
+    //   $("#book-collection").hide();
+    //   $("#book-volume").show();
+    // } else {
+    //   $("#book-volume").hide();
+    //   $("#book-collection").show();
+    // }
   });
 
   $("#process-btn").on("click", () => {
@@ -27,7 +27,7 @@ $(function () {
     const bookStatus = $(`#${id}.new-book-status`).val();
 
     try {
-      const response = await axios.post(`/admin/product/${id}`, {
+      const response = await axios.post(`/admin/book/${id}`, {
         bookStatus: bookStatus,
       });
       console.log("response:", response); // axiosdan kladgan toliq datani korsh un
