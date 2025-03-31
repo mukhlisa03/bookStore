@@ -41,6 +41,7 @@ libraryController.getLogin = (req: Request, res: Response) => {
 libraryController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processSignup");
+    console.log("req.body:", req.body);
     const file = req.file;
     if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
