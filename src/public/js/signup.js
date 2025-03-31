@@ -33,7 +33,7 @@ $(function () {
 });
 
 function validateSignupForm() {
-  // console.log("EXECUTED validateSignupForm");
+  console.log("EXECUTED validateSignupForm");
   const memberNick = $(".member-nick").val(),
     memberPhone = $(".member-phone").val(),
     memberPassword = $(".member-password").val(),
@@ -57,7 +57,7 @@ function validateSignupForm() {
   const memberImage = $(".member-image").get(0).files[0].name
     ? $(".member-image").get(0).files[0].name
     : null;
-  if (!memberImage) {
+  if (!memberImage) {  // rasm mavjud bolmasa!
     alert("Please insert library image!");
     return false; // backendga request qlmasligi uchun
   }
