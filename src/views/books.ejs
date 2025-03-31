@@ -10,7 +10,7 @@
           <a class="nav-link active" href="/admin/">Home</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/admin/books/all">Menu</a>
+          <a class="nav-link" href="/admin/book/all">Menu</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
           <a class="nav-link" href="/admin/user/all">Users</a>
@@ -28,7 +28,7 @@
     <div class="library-menu-frame">
       <div class="board">
         <div class="books-table">
-          <span class="new-book-txt" style="margin-bottom: 30px" >
+          <span class="new-dish-txt" style="margin-bottom: 30px">
             LIBRARY MENU
           </span>
           <table class="table table-bordered table-hover">
@@ -44,15 +44,25 @@
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
-            <tbody style="background: white">
-              <td>
-                <select class="spec-select new-product-status">
-                  <option value="PAUSE" selected>PAUSE</option>
-                  <option value="PROCESS">PROCESS</option>
-                  <option value="DELETE">DELETE</option>
-                </select>
-              </td>
-            </tbody>
+            <% books.map(function(value, key) { %>
+              <tbody style="background: white">
+                <td><%= key + 1 %></td>
+                <td><%= value.bookName %></td>
+                <td><%= value.bookType %></td>
+                <td><%= value.bookLanguage %></td>
+                <td><%= value.bookAuthor %></td>
+                <td><%= value.bookPrice %></td>
+                <td>
+                  <select class="spec-select new-book-status" 
+                  id="<%= value._id %>"
+                  >
+                    <option value="PAUSE" <%= value.bookStatus === 'PAUSE' ? 'selected': '' %> >PAUSE</option>
+                    <option value="PROCESS" <%= value.bookStatus === 'PROCESS' ? 'selected': '' %> >PROCESS</option>
+                    <option value="DELETE" <%= value.bookStatus === 'DELETE' ? 'selected': '' %> >DELETE</option>
+                  </select>
+                </td>
+              </tbody>
+            <% })  %>
             <!--  LOOP PRODUCTS: END  -->
           </table>
           <div
@@ -65,6 +75,7 @@
           </div>
         </div>
         <form
+        onsubmit="return validateForm()"
           action="/admin/book/create"
           method="POST"
           class="book-container"
@@ -92,19 +103,55 @@
           </div>
           <div class="half-input-frame">
             <div class="half-input">
-              <label>Book Price</label>
+              <label>Book Type</label>
               <input
                 type="number"
-                placeholder="Price"
-                name="bookPrice"
-                class="book-price"
+                placeholder="Type"
+                name="bookType"
+                class="book-type"
+              />
+            </div>
+            <div class="half-input">
+              <label>Book Language</label>
+              <input
+                type="text"
+                placeholder="Language"
+                name="BookLanguage"
+                class="book-language"
               />
             </div>
           </div>
           <div class="half-input-frame">
             <div class="half-input">
+              <label>Book Author</label>
+              <input
+                type="text"
+                placeholder="Author"
+                name="BookAuthor"
+                class="book-author"
+              />
             </div>
 
+            <div class="half-input" id="product-collection">
+              <label>Book Price</label>
+              <input
+                type="number"
+                placeholder="Price"
+                name="BookPrice"
+                class="book-price"
+              />
+            </div>
+
+            <!-- <div class="half-input" id="product-volume" style="display: none">
+              <label>Drink Volume</label>
+              <select class="product-volume" name="productVolume">
+                <option value="0.5">0,5 liters</option>
+                <option value="1" selected>1 liters</option>
+                <option value="1.2">1,2 liters</option>
+                <option value="1.5">1,5 liters</option>
+                <option value="2">2 liters</option>
+              </select>
+            </div> -->
           </div>
           <div class="long-input">
             <label>Book Description</label>
@@ -122,6 +169,7 @@
                   name="bookImages"
                   class="image-one"
                   required
+                  onchange="previewFileHandler(this, 1)"
                 />
               </div>
               <div class="upload-img-box">
@@ -131,6 +179,7 @@
                   id="file"
                   name="bookImages"
                   class="image-two"
+                  onchange="previewFileHandler(this, 2)"
                 />
               </div>
               <div class="upload-img-box">
@@ -140,6 +189,7 @@
                   id="file"
                   name="bookImages"
                   class="image-three"
+                  onchange="previewFileHandler(this, 3)"
                 />
               </div>
               <div class="upload-img-box">
@@ -149,6 +199,7 @@
                   id="file"
                   name="bookImages"
                   class="image-four"
+                  onchange="previewFileHandler(this, 4)"
                 />
               </div>
               <div class="upload-img-box">
@@ -158,9 +209,10 @@
                   id="file"
                   name="bookImages"
                   class="image-five"
+                  onchange="previewFileHandler(this, 5)"
                 />
               </div>
-              <input name="libraryid" class="library-id" hidden />
+              <input name="libraryIid" class="library-id" hidden />
             </div>
           </div>
 
