@@ -3,6 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from '../models/Member.service';
 import { LoginInput, Member, MemberInput } from '../libs/types/member';
 import Errors from '../libs/Error';
+import libraryController from './library.controller';
 
 // REACT
 
@@ -42,3 +43,11 @@ memberController.login = async (req: Request, res: Response) => {
 };
 
 export default memberController;
+
+
+// Distraction bu => qiymatlarni {} shunaqa qavsda olnadi aynan qaysi locationdanligi yzoladi
+
+
+// bookController
+// memberController
+// libraryController
