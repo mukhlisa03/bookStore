@@ -41,7 +41,7 @@ class MemberService {
           memberNick: input.memberNick,
           memberStatus: { $ne: MemberStatus.DELETE },  // delete statusli memberlar login bolomidi
         },
-        { memberNick: 1, memberPassword: 1, memberStatus: 1 }
+        { memberNick: 1, memberPassword: 1, memberStatus: 1 } // memberStatus ham => forced qlnadi
       )
       .exec();
 
