@@ -43,11 +43,3 @@ memberController.login = async (req: Request, res: Response) => {
 };
 
 export default memberController;
-
-
-// Distraction bu => qiymatlarni {} shunaqa qavsda olnadi aynan qaysi locationdanligi yzoladi
-
-
-// bookController
-// memberController
-// libraryController
