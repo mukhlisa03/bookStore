@@ -18,13 +18,13 @@ export enum Message {
     USED_NICK_PHONE = "You are inserting already used nick or phone!",
     TOKEN_CREATION_ERROR = "Token creation error!",
     NO_MEMBER_NICK = "No member with that member nick!",
-    BLOCKED_USER = "You have been blocked, contact the library!",
+    BLOCKED_USER = "You have been blocked, contact the Library!",
     WRONG_PASSWORD = "Wrong password, please try again!",
     NOT_AUTHENTICATED = "You are not authenticated,  Please login first",
 }
 
 class Errors extends Error {   // Errors classi => extend boladi Error dan (inheritance)
-    public code: HttpCode;    // yuqoridagi enum
+    public code: HttpCode;   
     public message: Message;  
 
     // standard error un ishl.di
@@ -33,7 +33,7 @@ class Errors extends Error {   // Errors classi => extend boladi Error dan (inhe
         message: Message.SOMETHING_WENT_WRONG,
     };
 
-    constructor(statusCode: HttpCode, statusMessage: Message) {  // type => HttpCode va Message
+    constructor(statusCode: HttpCode, statusMessage: Message) {  
         super();   
         this.code = statusCode;
         this.message = statusMessage;
