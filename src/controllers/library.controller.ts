@@ -93,7 +93,7 @@ libraryController.logout = async (req: AdminRequest, res: Response) => {
     console.log("logout");
     req.session.destroy(function () {
       // destroy qlshni kutsh
-      res.redirect("/admin"); // destroy bolb adminga yuboradi
+      res.redirect("/admin"); // destroy bolb admin page yuboradi
     });
   } catch (err) {
     console.log("Error, logout", err);
