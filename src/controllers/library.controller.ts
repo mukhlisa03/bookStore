@@ -11,7 +11,7 @@ const libraryController: T = {};
 libraryController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHome");
-    res.render("home"); // send | render | redirect | json
+    res.render("home"); // send | render | redirect | json  => response type
   } catch (err) {
     console.log("Error, goHome", err);
     res.redirect("/admin");
@@ -51,7 +51,7 @@ libraryController.processSignup = async (req: AdminRequest, res: Response) => {
     newMember.memberType = MemberType.LIBRARY;
     const result = await memberService.processSignup(newMember);
 
-    req.session.member = result; // sesion collectionning member qsmiga resultda yangi hosil bolgan libraryni qoshadi
+    req.session.member = result; // sesion collectionning member qsmiga resultda yangi hosil bolgan libraryni qdi
     req.session.save(function () {
       res.redirect("/admin/book/all");
     });
