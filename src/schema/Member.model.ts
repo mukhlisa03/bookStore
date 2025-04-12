@@ -69,4 +69,4 @@ export default mongoose.model('Member', memberSchema);
 // MVC => MODEL VIEW CONTROLLER
 // C =>   Object
 // M =>   Class
-// V =>   EJS
+// V =>   EJS => View => HTML
