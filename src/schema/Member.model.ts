@@ -66,7 +66,7 @@ const memberSchema = new Schema({
 export default mongoose.model('Member', memberSchema); 
 // schema modelga aylantrshda => memberSchema class ga ozgaradi
 // memberschema modelni memberschema obj orqali qurlyapti
-
+// MVC => MODEL VIEW CONTROLLER
 // C =>   Object
 // M =>   Class
 // V =>   EJS
