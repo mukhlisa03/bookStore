@@ -4,10 +4,13 @@ import MemberService from '../models/Member.service';
 import { LoginInput, Member, MemberInput } from '../libs/types/member';
 import Errors from '../libs/Error';
 import libraryController from './library.controller';
+import AuthService from '../models/Auth.service';
 
 // REACT
 
 const memberService = new MemberService();
+const authService = new AuthService();
+
 const memberController: T = {};
 
 
@@ -16,7 +19,10 @@ memberController.signup = async (req: Request, res: Response) => {
     console.log("signup");
     const input: MemberInput = req.body,
      result: Member = await memberService.signup(input); 
-     // TODO:TOKEN Authentication
+     const token = await authService.createToken(result);
+     console.log("token:", token);
+
+     console.log("result:", result);
     
     res.json({member: result});
   } catch (err) {
@@ -31,8 +37,10 @@ memberController.login = async (req: Request, res: Response) => {
   try {
     console.log("login");
     const input: LoginInput = req.body,
-    result = await memberService.login(input);
-    // TODO:TOKEN Authentication
+    result = await memberService.login(input),
+    token = await authService.createToken(result);
+    console.log("token: ", token);
+
 
     res.json({member: result});
   } catch (err) {
