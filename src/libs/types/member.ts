@@ -44,6 +44,12 @@ export interface MemberUpdateInput {
   memberImage?: string;
 }
 
+export interface ExtendedRequest extends Request {
+  member: Member; // member qiymat => type yuqoridagi Memberga teng
+  file: Express.Multer.File;
+  files: Express.Multer.File[];
+}
+
 export interface AdminRequest extends Request {
   member: Member; // member qiymat => type yuqoridagi Memberga teng
   session: Session & { member: Member }; // type Session (ichida => member bor)
