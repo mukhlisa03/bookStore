@@ -11,55 +11,56 @@ enum => belgn qiymatlar ketma-ketligi (spesific case) ishl,di
 
 // SCHEMA => alohida language, suniy table lar hosil qlnyapti
 // _id  => bn 9ta data kirtldi
-const memberSchema = new Schema({    
+const memberSchema = new Schema(
+  {
     memberType: {
-        type: "string",
-        enum: MemberType,
-        default: MemberType.USER  // kirtlmagan default USER ni oladi
+      type: "string",
+      enum: MemberType,
+      default: MemberType.USER, // kirtlmagan default USER ni oladi
     },
 
     memberStatus: {
-        type: "string",
-        enum: MemberStatus,
-        default: MemberStatus.ACTIVE, 
+      type: "string",
+      enum: MemberStatus,
+      default: MemberStatus.ACTIVE,
     },
-
 
     memberNick: {
-        type: "string",
-        index: {unique: true, sparse: true},    
-        required: true,
-    }, 
-
-
-    memberPhone: {
-        type: "string",
-        index: {unique: true, sparse: true},
-        required: true,  // tel raqam kirtlshi shart buyrugi berlyapti
+      type: "string",
+      index: { unique: true, sparse: true },
+      required: true,
     },
 
+    memberPhone: {
+      type: "string",
+      index: { unique: true, sparse: true },
+      required: true, // tel raqam kirtlshi shart buyrugi berlyapti
+    },
 
     memberPassword: {
-        type: "string",
-        select: false,  // database by default olb bermasn sababi u sirli malumot
-        required: true,   // passwrod albatta bolishi kk bolgan dataset
+      type: "string",
+      select: false, // database by default olb bermasn sababi u sirli malumot
+      required: true, // passwrod albatta bolishi kk bolgan dataset
     },
 
     memberAddress: {
-        type: "string",
+      type: "string",
     },
-
 
     memberDesc: {
-        type: "string",
+      type: "string",
     },
-
 
     memberImage: {
-        type: "string",
+      type: "string",
     },
-},
-{timestamps: true}    // createdAt va UpdatedAt ni avtomatik qoyb beradi
+    
+    memberPoints: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true } // createdAt va UpdatedAt ni avtomatik qoyb beradi
 );    
 
 
