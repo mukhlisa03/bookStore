@@ -39,7 +39,7 @@ class MemberService {
       .findOne(
         {
           memberNick: input.memberNick,
-          memberStatus: { $ne: MemberStatus.DELETE },  // delete statusli memberlar login bolomidi
+          memberStatus: { $ne: MemberStatus.DELETE }, // delete statusli memberlar login bolomidi
         },
         { memberNick: 1, memberPassword: 1, memberStatus: 1 } // memberStatus ham => forced qlnadi
       )
@@ -47,8 +47,7 @@ class MemberService {
 
     if (!member) {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
-    }
-    else if (member.memberStatus === MemberStatus.BLOCK) {
+    } else if (member.memberStatus === MemberStatus.BLOCK) {
       throw new Errors(HttpCode.FORBIDDED, Message.BLOCKED_USER);
     }
 
@@ -69,6 +68,17 @@ class MemberService {
     if (!result) {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
+
+    return result.toObject() as Member;
+  }
+
+  public async getMemberDetail(member: Member): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel
+      .findOne({ _id: memberId, memberStatus: MemberStatus.ACTIVE })
+      .exec();
+
+    if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     return result.toObject() as Member;
   }
