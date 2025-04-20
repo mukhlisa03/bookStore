@@ -1,7 +1,14 @@
+import { T } from "../libs/types/common";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Error";
-import { Book, BookInput, BookUpdateInput } from "../libs/types/book";
+import {
+  Book,
+  BookInput,
+  BookInquiry,
+  BookUpdateInput,
+} from "../libs/types/book";
 import BookModel from "../schema/Book.model";
+import { BookStatus } from "../libs/enums/book.enum";
 
 class BookService {
   private readonly bookModel;
@@ -11,6 +18,33 @@ class BookService {
   }
 
   /** SPA **/
+
+  public async getBooks(inquiry: BookInquiry): Promise<Book[]> {
+    const match: T = { bookStatus: BookStatus.PROCESS };
+
+    if (inquiry.bookType) match.bookType = inquiry.bookType;
+
+    if (inquiry.search) {
+      match.bookName = { $regex: new RegExp(inquiry.search, "i") };
+    }
+
+    const sort: T =
+      inquiry.order === "bookPrice"
+        ? { [inquiry.order]: 1 }
+        : { [inquiry.order]: -1 };
+
+    const result = await this.bookModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
+        { $limit: inquiry.limit * 1 },
+      ])
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
 
   /** SSR **/
 

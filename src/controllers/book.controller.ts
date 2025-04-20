@@ -2,14 +2,35 @@ import { Request, Response } from "express";
 import Errors, { HttpCode, Message } from "../libs/Error";
 import { T } from "../libs/types/common";
 import BookService from "../models/Book.service";
-import { BookInput } from "../libs/types/book";
+import { BookInput, BookInquiry } from "../libs/types/book";
 import { AdminRequest } from "../libs/types/member";
 
 const bookService = new BookService();
 
 const bookController: T = {};
-/** SPA **/
 
+/** SPA **/
+bookController.getBooks = async (req: Request, res: Response) => {
+  try {
+    console.log("getBooks");
+    const { page, limit, order, bookType, search } = req.query;
+    const inquiry: BookInquiry = {
+      order: String(order),
+      page: Number(page),
+      limit: Number(limit),
+    };
+    if (bookType) inquiry.bookType = String(bookType);
+    if (search) inquiry.search = String(search);
+
+    const result = await bookService.getBooks(inquiry);
+
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("Error, getBooks", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+};
 
 /** SSR **/
 
@@ -19,7 +40,7 @@ bookController.getAllBooks = async (req: Request, res: Response) => {
     const data = await bookService.getAllBooks();
     console.log("data:", data);
 
-    res.render("books", {books: data});
+    res.render("books", { books: data });
   } catch (err) {
     console.log("Error, getAllBooks", err);
     if (err instanceof Errors) res.status(err.code).json(err);
@@ -47,8 +68,8 @@ bookController.createNewBook = async (req: AdminRequest, res: Response) => {
     );
   } catch (err) {
     console.log("Error, createNewBook", err);
-        const message =
-          err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
       `<script> alert(${message}); window.location.replace('/admin/book/all') </script> `
     );
@@ -63,7 +84,7 @@ bookController.updateChosenBook = async (req: Request, res: Response) => {
 
     const result = await bookService.updateChosenBook(id, req.body);
 
-    res.status(HttpCode.OK).json({data: result});
+    res.status(HttpCode.OK).json({ data: result });
   } catch (err) {
     console.log("Error, updateChosenBook", err);
     if (err instanceof Errors) res.status(err.code).json(err);
