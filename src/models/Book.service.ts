@@ -65,8 +65,8 @@ class BookService {
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
-    // if authenticated users => first => view log creation
     if (memberId) {
+      // Check Existense
       const input: ViewInput = {
         memberId: memberId,
         viewRefId: bookId,
@@ -74,18 +74,23 @@ class BookService {
       };
       const existView = await this.viewService.checkViewExistense(input);
 
+      console.log("exist:", !!existView);
       if (!existView) {
+        // Insert View
         console.log("PLANNING TO INSERT NEW VIEW");
         await this.viewService.insertMemberView(input);
 
+        // Increase Counts
         result = await this.bookModel
-          .findByIdAndUpdate(bookId, { $inc: { bookViews: +1 } }, { new: true })
+          .findByIdAndUpdate(bookId, 
+            { $inc: { bookViews: +1 } }, 
+            { new: true }
+          )
           .exec();
       }
     }
 
     return JSON.parse(JSON.stringify(result)) as Book;
-
   }
 
   /** SSR **/
