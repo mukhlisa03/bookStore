@@ -10,12 +10,17 @@ import {
 import BookModel from "../schema/Book.model";
 import { BookStatus } from "../libs/enums/book.enum";
 import { ObjectId } from "mongoose";
+import ViewService from "./View.service";
+import { ViewInput } from "../libs/types/view";
+import { ViewGroup } from "../libs/enums/view.enum";
 
 class BookService {
   private readonly bookModel;
+  public viewService;
 
   constructor() {
     this.bookModel = BookModel;
+    this.viewService = new ViewService();
   }
 
   /** SPA **/
@@ -56,13 +61,31 @@ class BookService {
         bookStatus: BookStatus.PROCESS,
       })
       .exec();
-    // console.log(result);  
+    // console.log(result);
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
-    // TODO: if authenticated users => first => view log creation
+    // if authenticated users => first => view log creation
+    if (memberId) {
+      const input: ViewInput = {
+        memberId: memberId,
+        viewRefId: bookId,
+        viewGroup: ViewGroup.BOOK,
+      };
+      const existView = await this.viewService.checkViewExistense(input);
 
-    return result.toObject();
+      if (!existView) {
+        console.log("PLANNING TO INSERT NEW VIEW");
+        await this.viewService.insertMemberView(input);
+
+        result = await this.bookModel
+          .findByIdAndUpdate(bookId, { $inc: { bookViews: +1 } }, { new: true })
+          .exec();
+      }
+    }
+
+    return JSON.parse(JSON.stringify(result)) as Book;
+
   }
 
   /** SSR **/
