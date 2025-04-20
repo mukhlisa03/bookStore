@@ -5,7 +5,7 @@ import uploader from "./libs/utils/uploader";
 import bookController from "./controllers/book.controller";
 
 /** MEMBER **/
-router.get("/member/library", memberController.getLibrary)
+router.get("/member/library", memberController.getLibrary);
 router.post("/member/login", memberController.login);
 router.post("/member/signup", memberController.signup);
 router.post(
@@ -30,6 +30,7 @@ router.get("/member/top-users", memberController.getTopUsers);
 
 /** Book **/
 router.get("/book/all", bookController.getBooks);
+router.get("/book/:id", memberController.retrieveAuth, bookController.getBook);
 
 /** Order **/
 

@@ -9,6 +9,7 @@ import {
 } from "../libs/types/book";
 import BookModel from "../schema/Book.model";
 import { BookStatus } from "../libs/enums/book.enum";
+import { ObjectId } from "mongoose";
 
 class BookService {
   private readonly bookModel;
@@ -44,6 +45,24 @@ class BookService {
 
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
+  }
+
+  public async getBook(memberId: ObjectId | null, id: string): Promise<Book> {
+    const bookId = shapeIntoMongooseObjectId(id);
+
+    let result = await this.bookModel
+      .findOne({
+        _id: bookId,
+        bookStatus: BookStatus.PROCESS,
+      })
+      .exec();
+    // console.log(result);  
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    // TODO: if authenticated users => first => view log creation
+
+    return result.toObject();
   }
 
   /** SSR **/
