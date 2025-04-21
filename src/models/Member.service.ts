@@ -25,7 +25,7 @@ class MemberService {
         memberType: MemberType.LIBRARY,
       })
       .exec();
-    
+
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     return result.toObject() as Member;
@@ -121,6 +121,27 @@ class MemberService {
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     return result.map((user) => user.toObject() as Member);
+  }
+
+  public async addUserPoint(
+    member: Member,
+    point: number
+  ): Promise<Member | null> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+
+    const result = await this.memberModel
+      .findOneAndUpdate(
+        {
+          _id: memberId,
+          memberType: MemberType.USER,
+          memberStatus: MemberStatus.ACTIVE,
+        },
+        { $inc: { memberPoints: point } },
+        { new: true }
+      )
+      .exec();
+
+    return result ? (result.toObject() as Member) : null;
   }
 
   /** SSR */
