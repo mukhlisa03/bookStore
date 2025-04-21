@@ -3,6 +3,7 @@ const router = express.Router();
 import memberController from "./controllers/member.controller";
 import uploader from "./libs/utils/uploader";
 import bookController from "./controllers/book.controller";
+import orderController from "./controllers/order.controller";
 
 /** MEMBER **/
 router.get("/member/library", memberController.getLibrary);
@@ -33,5 +34,10 @@ router.get("/book/all", bookController.getBooks);
 router.get("/book/:id", memberController.retrieveAuth, bookController.getBook);
 
 /** Order **/
+router.post(
+  "/order/create",
+  memberController.verifyAuth,
+  orderController.createOrder
+);
 
 export default router;
