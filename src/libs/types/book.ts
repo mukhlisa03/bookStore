@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-import { BookStatus } from "../enums/book.enum";
+import { BookLanguage, BookStatus } from "../enums/book.enum";
 
 export interface Book {
   _id: string | ObjectId;
@@ -9,7 +9,7 @@ export interface Book {
   bookType: string;
   bookImages: string[];
   bookAuthor: string;
-  bookLanguage: string;
+  bookLanguage: BookLanguage;
   bookDesc: string;
   bookViews: number;
 }
@@ -18,7 +18,7 @@ export interface BookInquiry {
   order: string;
   page: number;
   limit: number;
-  bookType?: string;
+  bookLanguage?: BookLanguage;
   search?: string;
 }
 
@@ -29,7 +29,7 @@ export interface BookInput {
   bookType: string;
   bookImages: string[];
   bookAuthor: string;
-  bookLanguage: string;
+  bookLanguage: BookLanguage;
   bookDesc: string;
   bookViews?: number;
 }
@@ -42,7 +42,7 @@ export interface BookUpdateInput {
   bookType?: string;
   bookImages?: string[];
   bookAuthor?: string;
-  bookLanguage?: string;
+  bookLanguage?: BookLanguage;
   bookDesc?: string;
   bookViews?: number;
 }

@@ -28,7 +28,7 @@ class BookService {
   public async getBooks(inquiry: BookInquiry): Promise<Book[]> {
     const match: T = { bookStatus: BookStatus.PROCESS };
 
-    if (inquiry.bookType) match.bookType = inquiry.bookType;
+    if (inquiry.bookLanguage) match.bookLanguage = inquiry.bookLanguage;
 
     if (inquiry.search) {
       match.bookName = { $regex: new RegExp(inquiry.search, "i") };
@@ -82,10 +82,7 @@ class BookService {
 
         // Increase Counts
         result = await this.bookModel
-          .findByIdAndUpdate(bookId, 
-            { $inc: { bookViews: +1 } }, 
-            { new: true }
-          )
+          .findByIdAndUpdate(bookId, { $inc: { bookViews: +1 } }, { new: true })
           .exec();
       }
     }

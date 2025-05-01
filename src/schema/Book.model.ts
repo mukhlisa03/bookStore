@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { BookStatus } from "../libs/enums/book.enum";
+import { BookLanguage, BookStatus } from "../libs/enums/book.enum";
 
 const bookSchema = new Schema(
   {
@@ -36,7 +36,8 @@ const bookSchema = new Schema(
 
     bookLanguage: {
       type: String,
-      required: true,
+      enum: BookLanguage,
+      default: BookLanguage.UZBEK,
     },
 
     bookDesc: {

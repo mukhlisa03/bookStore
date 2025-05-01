@@ -3,13 +3,13 @@ console.log("Books frontend javascript file");
 $(function () {
   $(".book-collection").on("change", () => {
     const selectedValue = $(".book-collection").val();
-    // if (selectedValue === "DRINK") {
-    //   $("#book-collection").hide();
-    //   $("#book-volume").show();
-    // } else {
-    //   $("#book-volume").hide();
-    //   $("#book-collection").show();
-    // }
+    if (selectedValue === "OTHER") {
+      $("#book-collection").hide();
+      $("#book-volume").show();
+    } else {
+      $("#book-volume").hide();
+      $("#book-collection").show();
+    }
   });
 
   $("#process-btn").on("click", () => {

@@ -4,6 +4,7 @@ import { T } from "../libs/types/common";
 import BookService from "../models/Book.service";
 import { BookInput, BookInquiry } from "../libs/types/book";
 import { AdminRequest, ExtendedRequest } from "../libs/types/member";
+import { BookLanguage } from "../libs/enums/book.enum";
 
 const bookService = new BookService();
 
@@ -13,13 +14,13 @@ const bookController: T = {};
 bookController.getBooks = async (req: Request, res: Response) => {
   try {
     console.log("getBooks");
-    const { page, limit, order, bookType, search } = req.query;
+    const { page, limit, order, bookLanguage, search } = req.query;
     const inquiry: BookInquiry = {
       order: String(order),
       page: Number(page),
       limit: Number(limit),
     };
-    if (bookType) inquiry.bookType = String(bookType);
+    if (bookLanguage) inquiry.bookLanguage = bookLanguage as BookLanguage;
     if (search) inquiry.search = String(search);
 
     const result = await bookService.getBooks(inquiry);
