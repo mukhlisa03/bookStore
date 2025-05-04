@@ -9,5 +9,4 @@ export enum BookLanguage {
   ENGLISH = "ENGLISH",
   KOREAN = "KOREAN",
   RUSSIAN = "RUSSIAN",
-  OTHER = "OTHER",
 }
