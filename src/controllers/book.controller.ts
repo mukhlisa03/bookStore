@@ -15,14 +15,17 @@ bookController.getBooks = async (req: Request, res: Response) => {
   try {
     console.log("getBooks");
     const { page, limit, order, bookLanguage, search } = req.query;
+    console.log("req.query:", req.query);
     const inquiry: BookInquiry = {
       order: String(order),
       page: Number(page),
       limit: Number(limit),
     };
     if (bookLanguage) inquiry.bookLanguage = bookLanguage as BookLanguage;
+    console.log(typeof bookLanguage);
     if (search) inquiry.search = String(search);
 
+    console.log("inquiry:", inquiry);
     const result = await bookService.getBooks(inquiry);
 
     res.status(HttpCode.OK).json(result);
