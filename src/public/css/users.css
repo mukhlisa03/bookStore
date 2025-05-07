@@ -79,11 +79,11 @@
 
 .users-container .header-name {
   font-family: "Source Serif Pro";
-  font-style: normal;
+  font-style: unset;
   font-weight: 400;
   font-size: 30px;
   line-height: 25px;
-  color: #ffffff;
+  color: rgba(89, 58, 17, 0.943);
 }
 
 .users-container select:focus {
