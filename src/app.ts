@@ -10,6 +10,10 @@ import { MORGAN_FORMAT } from "./libs/config";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
+import { Server as SocketIOServer } from "socket.io";
+import http from "http";
+
+
 
 const MongoDBStore = ConnectMongoDB(session); // var name => MongoDbStore
 const store = new MongoDBStore({
@@ -61,4 +65,25 @@ app.set("view engine", "ejs");
 app.use("/admin", routerAdmin); // SSR => Adminka loyihasi uchun => backendda frontendni qurb olsh
 app.use("/", router); // SPA: REACT
 
-export default app;
+
+// Socket.io integration
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+});
+
+let summaryClient = 0;
+io.on("connection", (socket) => {
+  summaryClient++;
+  console.log(`Connection & total [${summaryClient}]`);
+
+  socket.on("disconnect", () => {
+    summaryClient--;
+    console.log(`Disconnection & total [${summaryClient}]`);
+  });
+});
+
+export default server;

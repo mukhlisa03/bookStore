@@ -12,7 +12,7 @@ console.log("EXECUTED!");
 import dotenv from "dotenv"; 
 dotenv.config(); 
 
-import app from "./app";
+import server from "./app";
 import mongoose from "mongoose";
 
 // mongoose.set("strictQuery", false);
@@ -23,7 +23,7 @@ mongoose
   .then((data) => {
     console.log("MongoDB connection succeed!");
     const PORT = process.env.PORT ?? 2003; 
-    app.listen(PORT, function () {
+    server.listen(PORT, function () {
       console.info(`The server is running successfully on port: ${PORT}`);
       console.info(`Admin project on http://localhost:${PORT}/admin \n`); // Admin projectning homepage ga yuboradi
     });
