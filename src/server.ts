@@ -5,24 +5,23 @@ console.log("EXECUTED!");
 // console.log(currentTime);
 
 // const person: string = "Mukhlisa";
-// const count: number = 100; 
+// const count: number = 100;
 
-
-
-import dotenv from "dotenv"; 
-dotenv.config(); 
+import dotenv from "dotenv";
+dotenv.config({
+  path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
+});
 
 import server from "./app";
 import mongoose from "mongoose";
 
 // mongoose.set("strictQuery", false);
 
-
 mongoose
   .connect(process.env.MONGO_URL as string, {})
   .then((data) => {
     console.log("MongoDB connection succeed!");
-    const PORT = process.env.PORT ?? 2003; 
+    const PORT = process.env.PORT ?? 2003;
     server.listen(PORT, function () {
       console.info(`The server is running successfully on port: ${PORT}`);
       console.info(`Admin project on http://localhost:${PORT}/admin \n`); // Admin projectning homepage ga yuboradi
