@@ -15,7 +15,7 @@ dotenv.config({
 import server from "./app";
 import mongoose from "mongoose";
 
-// mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", false);  
 
 mongoose
   .connect(process.env.MONGO_URL as string, {})
